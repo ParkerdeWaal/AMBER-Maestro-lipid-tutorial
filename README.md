@@ -53,7 +53,8 @@ charmmlipid2amber.py -c POPC.csv -i NMEfix.pdb -o LipidFix.pdb
 sed 's/CL/Cl-/' LipidFix.pdb | sed 's/NA/Na+/' | sed 's/  CL/Cl-/' | sed 's/  NA/Na+/' > SaltFix.pdb
 awk '/NME/{print $0 ;print "Ter";next}1' SaltFix.pdb > TerFIX.pdb
 ```
-Next, open TerFIX.pdb and add CYX residues, if applicaplbe, and renumber NME residues by +1 (NME A 348A -> NME A 349)
+
+Next, open TerFIX.pdb and add CYX residues, if applicable, and renumber NME residues by +1 (NME A 348A -> NME A 349)
 
 ![Renumb](/images/terminal.png)
 
