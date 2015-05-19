@@ -1,0 +1,148 @@
+Job launching command:
+$SCHRODINGER/utilities/multisim -JOBNAME desmond_setup_1 -m desmond_setup_1.msj desmond_setup_1.mae -o desmond_setup_1-out.cms -PROJ /home/pdewaal/.schrodinger/tmp/tproj06296a3181 -DISP append -VIEWNAME App -HOST localhost
+
+Booting the multisim workflow engine...
+           multisim version: 3.8.5.18
+            mmshare version: 26017
+                    Jobname: desmond_setup_1
+                   Username: pdewaal
+            Master job host: localhost
+                Subjob host: localhost
+                     Job ID: neuschnee-0-555ab09f
+            multisim script: desmond_setup_1.msj
+       Structure input file: desmond_setup_1.mae
+            CPUs per subjob: (unspecified in command)
+             Job start time: Mon May 18 23:40:17 2015
+           Launch directory: /home/pdewaal/Documents/AmberSystemBuilding/example
+               $SCHRODINGER: /opt/schrodinger2014-2
+
+Parsing the multisim script file...
+
+Summary of user stages:
+  stage 1 - task
+  stage 2 - build_geometry
+  stage 3 - assign_forcefield
+(3 stages in total)
+[running at reduced cpu priority]
+
+Workflow is started now.
+
+Stage 1 - task
+stage[1] task: Detecting system type...
+stage[1] task:   It seems a raw geometry for regular molecular dynamics simulations
+stage[1] task: Recognizing traits of system...
+stage[1] task:   (none)
+
+Stage 1 completed successfully.
+
+
+Stage 2 - build_geometry
+
+Launched Job("neuschnee-0-555ab0a6"):
+  Launch time: 2015-05-18-23:40:22
+  Host       : localhost
+  Jobname    : desmond_setup_1_2
+  Stage      : 2 (build_geometry)
+
+Job("neuschnee-0-555ab0a6") was successfully finished.
+  Host       : localhost
+  Launch time: Mon May 18 23:40:22 2015
+  Start time : Mon May 18 23:40:22 2015
+  End time   : Mon May 18 23:40:29 2015
+  Duration   : 0h 0' 7"
+  CPUs       : 1
+  CPU time   : 0h 0' 7"
+  Exit code  : 0
+  Jobname    : desmond_setup_1_2
+  Stage      : 2 (build_geometry)
+
+Stage 2 completed successfully.
+
+
+Stage 3 - assign_forcefield
+Running force_field_builder version 26017
+
+OPLS Version: OPLS_2005
+FEP mode: 2
+FEP retain angle: 2
+Reading input structures.
+Creating New ffio_ff block...
+Creating New ffio_ff block...
+Creating New ffio_ff block...
+Creating New ffio_ff block...
+Creating New ffio_ff block...
+Creating New ffio_ff block...
+
+force_field_builder: job successfully run
+
+viparr 1.5.1
+All FF directories, in order:
+/opt/schrodinger2014-2/desmond-v38017/lib/Linux-x86_64/../../data/viparr/ff/spc
+Plug-in directory: /opt/schrodinger2014-2/desmond-v38017/bin/Linux-x86_64/viparr1/plugins
+Reading maestro file <desmond_setup_1_3-out.cms_> ...
+Done reading maestro file
+Analyzing ct block 7
+Warning: Missing backward edges...adding them now
+******Constructing residue list for </opt/schrodinger2014-2/desmond-v38017/lib/Linux-x86_64/../../data/viparr/ff/spc> Structure 7
+******Main loop: Structure 7
+Pre-processing force field </opt/schrodinger2014-2/desmond-v38017/lib/Linux-x86_64/../../data/viparr/ff/spc> for rules and pseudos
+Processing force field </opt/schrodinger2014-2/desmond-v38017/lib/Linux-x86_64/../../data/viparr/ff/spc>
+Compressing FF representation...
+Building mae data structure...
+Number of pseudo particles: 0
+Writing maestro file <desmond_setup_1_3-out.cms_vp>
+Reading maeff file desmond_setup_1_3-out.cms_vp
+Finding constraint terms...
+
+Examining 5559 bonds in ffio_bonds section...
+Found 1797 hydrogen groups.
+Generating 434 unique AH2 constraint groups.
+Generating 247 unique AH3 constraint groups.
+Generating 1116 unique AH1 constraint groups.
+Will constrain 2725 unique bonds, 0 unique angles.
+
+Examining 133 bonds in ffio_bonds section...
+Found 40 hydrogen groups.
+Generating 32 unique AH2 constraint groups.
+Generating 5 unique AH3 constraint groups.
+Generating 3 unique AH1 constraint groups.
+Will constrain 82 unique bonds, 0 unique angles.
+
+Examining 0 bonds in ffio_bonds section...
+Found 0 hydrogen groups.
+Will constrain 0 unique bonds, 0 unique angles.
+
+Examining 0 bonds in ffio_bonds section...
+Found 0 hydrogen groups.
+Will constrain 0 unique bonds, 0 unique angles.
+
+Examining 0 bonds in ffio_bonds section...
+Found 0 hydrogen groups.
+Will constrain 0 unique bonds, 0 unique angles.
+
+Examining 2 bonds in ffio_bonds section...
+Found 1 hydrogen groups.
+Generating 1 unique HOH constraint groups.
+Will constrain 2 unique bonds, 1 unique angles.
+
+---------------------
+|       Total:      |
+|                   |
+|   3026 AH2 groups |
+|    652 AH3 groups |
+|   1359 AH1 groups |
+|   7550 HOH groups |
+---------------------
+Writing maeff file desmond_setup_1_3-out.cms
+5 ARITHMETIC/GEOMETRIC
+
+Stage 3 completed successfully.
+
+Cleaning up files...
+
+Multisim summary (Mon May 18 23:40:55 2015):
+  Stage 1 completed.
+  Stage 2 completed.
+  Stage 3 completed.
+  Total duration: 0h 0' 38"
+Multisim completed.

@@ -17,4 +17,29 @@ Open the OPM oriented PDB file in Maestro and select the 'Prep Wiz' tool using t
 
 ![Prep](/images/proteinPrepWizard.png)
 
-(I manually set CYX bonds in by editing the PDB with sublime)
+(While Maestro can automically assign CYX disulfides I prefer to perfer to assign them manually.)
+
+Optimize side chain protonation states and the hydrogen bonding network using PROPKA by clicking 'optimize'
+
+![PROPKA](/images/refine.png)
+
+**Always manually verify protonation states and side chain orentations manually by selecting 'Interactive Optimizer'**
+
+##Step 3: System Building
+Select Tasks > Molecular Dynamics > System Setup. Under 'Edit Membrane...' select POPC (300K) and click 'Place on Prealigned Structure'. Under 'Ions' select 'Neutralize by adding' and 'Add salt' to 0.15 molar concentration
+
+![Salt](/images/salts.png)
+
+Click Run. Note: For larger systems this may take up to several minutes.
+
+![DesRaw](/images/desmondRaw.png)
+
+##Step 4: Removing Hydrogens
+Select Tools > View In PyMOL > Workspace. Remove hydrogens on all protein and ligand residues (ACE -> NMA caps) *NOT* on lipids! 
+
+![HydroRemove](/images/removeHydrogens.png)
+
+
+
+
+

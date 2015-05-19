@@ -1,0 +1,34 @@
+task {
+  task = "desmond:auto"
+}
+
+build_geometry {
+  add_counterion = {
+     ion = Na
+     number = neutralize_system
+  }
+  box = {
+     shape = orthorhombic
+     size = [10.0 10.0 10.0 ]
+     size_type = buffer
+  }
+  membrane_box = {
+     lipid = POPC
+     size = [10.0 10.0 10.0 ]
+  }
+  rezero_system = false
+  salt = {
+     concentration = 0.15
+     negative_ion = Cl
+     positive_ion = Na
+  }
+  solvent = SPC
+}
+
+assign_forcefield {
+}
+
+# command example:
+# $SCHRODINGER/utilities/multisim -JOBNAME desmond_setup_1 -m desmond_setup_1.msj desmond_setup_1.mae
+
+
