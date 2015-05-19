@@ -39,7 +39,42 @@ Select Tools > View In PyMOL > Workspace. Remove hydrogens on all protein and li
 
 ![HydroRemove](/images/removeHydrogens.png)
 
+**Save the PDB as desmondOut.pdb, This is important for the script below to run automatically!**
 
+##Step 5: reformat PDB
+Copy POPC.csv, found in the includes folder, to the working folder and run the following terminal commands:
 
+```
+awk '{if ($4 == "SPC") printf("%4s %6d %-4s %-4s %5d %10.3f %7.3f %7.3f  1.00  0.00\n"), $1, $2, $3, $4, $5,$6,$7,$8; else print $0}' desmondOut.pdb > SPCfix.pdb
+sed 's/SPC/WAT/' SPCfix.pdb > WATfix.pdb
+awk '{if ($4 == "ACE" && $3 != "C") next; else print $0}' WATfix.pdb > ACEfix.pdb
+awk '{if ($4 == "NMA" && $3 != "N") next; else print $0}'  ACEfix.pdb | sed 's/NMA/NME/' > NMEfix.pdb
+charmmlipid2amber.py -c POPC.csv -i NMEfix.pdb -o LipidFix.pdb
+sed 's/CL/Cl-/' LipidFix.pdb | sed 's/NA/Na+/' | sed 's/  CL/Cl-/' | sed 's/  NA/Na+/' > SaltFix.pdb
+awk '/NME/{print $0 ;print "Ter";next}1' SaltFix.pdb > TerFIX.pdb
+```
+Next, open TerFIX.pdb and add CYX residues, if applicaplbe, and renumber NME residues by +1 (NME A 348A -> NME A 349)
 
+![Renumb](/images/terminal.png)
 
+##Step 6: TLeap input
+Extract the box dimensions from *desmond_setup_1-out.cms* 
+
+```
+  69.378655
+  0
+  0
+  0
+  64.033248
+  0
+  0
+  0
+  95.385489
+
+```
+
+To set TLeap system dimensions add the following line in your leap.in:
+
+`
+set YOUR_NAME_HERE box { 69.378655 64.033248 95.385489}
+`
