@@ -88,7 +88,6 @@ set system box { 69.378655 64.033248 95.385489 }
 saveamberparm system ./system/POLY.prmtop ./system/POLY.inpcrd
 
 quit
-
 ```
 
-**Due to Maestros naming of ions, it is important to check the total system charge before runing simunations. Typically a handful of ions will be removed due to naming duplications and must be added back via 'addIonsRand' system Na+ 7**
+**Due to Maestros naming of ions, it is important to check the total system charge before runing simunations. Typically a handful of ions will be removed due to naming duplications and must be added back via 'addIonsRand'**
