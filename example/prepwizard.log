@@ -1,0 +1,20 @@
+
+Assigned bond orders to the workspace, while skipping residues with existing double & triple bonds
+  No bond orders were changed
+
+Added hydrogens to the Workspace structure
+
+The following terminal residues have been capped: A:348, A:1
+
+Found 0 het groups
+
+Deleted waters farther than 5 angstroms from hets
+
+Found 0 waters
+
+Launched Optimize H-bonds (ProtAssign) job
+    Water sampling: on
+    Minimize hydrogens of altered species: off
+    Use crystal symmetry: off
+    Using PROPKA with pH: 7.0
+Optimize H-bonds job has completed
