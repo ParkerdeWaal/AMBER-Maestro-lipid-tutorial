@@ -71,7 +71,6 @@ Extract the box dimensions from *desmond_setup_1-out.cms*
   0
   0
   95.385489
-
 ```
 
 Utilizing these dimensions, here is an example TLeap input file:
