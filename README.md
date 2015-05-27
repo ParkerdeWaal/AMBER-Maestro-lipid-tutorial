@@ -44,7 +44,7 @@ Select Tools > View In PyMOL > Workspace. Remove hydrogens on all protein and li
 ##Step 5: reformat PDB
 Copy POPC.csv, found in the includes folder, to the working folder and run the following terminal commands:
 
-```
+```bash
 awk '{if ($4 == "SPC") printf("%4s %6d %-4s %-4s %5d %10.3f %7.3f %7.3f  1.00  0.00\n"), $1, $2, $3, $4, $5,$6,$7,$8; else print $0}' desmondOut.pdb > SPCfix.pdb
 sed 's/SPC/WAT/' SPCfix.pdb > WATfix.pdb
 awk '{if ($4 == "ACE" && $3 != "C") next; else print $0}' WATfix.pdb > ACEfix.pdb
