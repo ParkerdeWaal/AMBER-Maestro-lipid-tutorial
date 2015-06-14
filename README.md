@@ -1,6 +1,6 @@
 # AMBER Maestro Protein-Lipid Tutorial
 
-This tutorial provides a step-by-step protocol to build protein-lipid systems for AMBER using the free version of Maestro bundled with Desmond. In contrast to that of the CHARMM membrane system web builder, Maestro's system builder provides a greater level of control for system size and orentation within the membrane to optimize simulation NS/day. Currently, only POPC membranes are supported. However, users are encourage to generate and share their own charmmlipid2amber.py compatible conversion rulesets.
+This tutorial provides a step-by-step protocol to build protein-lipid systems for AMBER using the free version of Maestro bundled with Desmond. In contrast to that of the CHARMM membrane system web builder, Maestro's system builder provides a greater level of control for system size and orentation within the membrane to optimize simulation NS/day. Currently, only POPC membranes are supported. However, users are encouraged to generate and share their own charmmlipid2amber.py compatible conversion rulesets.
 
 While written for membrane proteins, this method can be applied to soluble proteins as well with slight modification.
 
