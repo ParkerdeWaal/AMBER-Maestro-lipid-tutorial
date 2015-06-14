@@ -39,7 +39,7 @@ Under *Ions* select *Neutralize by adding* and *Add salt* to 0.15 M.
 
 Next, select the *Solvation* tab to set your system dimensions and click run.
 
-![sysBuilder](/images/sysBuilder.png.png)
+![sysBuilder](/images/sysBuilder.png)
 
 Note: For larger systems this may take up to several minutes. At this point the water model does not matter. If you would like to use other water models than SPC simply edit the first bash script line in **step 5**.
 
