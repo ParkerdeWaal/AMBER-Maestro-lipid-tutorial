@@ -1,25 +1,28 @@
 # AMBER Maestro Protein-Lipid Tutorial
 
-This tutorial provides a step-by-step protocol to build Protein-Lipid systems for AMBER with Maestro. Corresponding example
+This tutorial provides a step-by-step protocol to build protein-lipid systems for AMBER using the free version of Maestro bundled with Desmond. In contrast to that of the CHARMM membrane system web builder, Maestro's system builder provides a greater level of control for system size and orentation within the membrane to optimize simulation NS/day.
+
+Before proceeding, it is highly recommened to familiarize yourself with the offical AMBER lipid tutorial found [here](http://ambermd.org/tutorials/advanced/tutorial16/) as a working level knowledge of AMBER membrane systems is assumed.
 
 ##Requirments
+* Any modern linux distribution
 * [Desmond/Maestro](https://www.deshawresearch.com/downloads/download_desmond.cgi)
 * [PyMOL](http://sourceforge.net/projects/pymol)
 
 ##Step 0: PDB preparation
-Open and clean PDB using PyMOL. This can be done in Maestro, however the interface for PyMOL is much simpler.
+Open and prepare your structure for LEaP input as normal in PyMOL or other PDB editing software. 
 
 ##Step 1: Determine Protein Membrane Orientation
-Submit membrane protein to the [OPM server](http://opm.phar.umich.edu/server.php) to determine optimal membrane orientation. 
+Submit the cleaned membrane protein generated in **step 0** to the [OPM server](http://opm.phar.umich.edu/server.php) for optimal membrane orientation determination. **Always verify the membrane orientation before proceeding.**
 
 ##Step 2: Maestro Prep Wiz
-Open the OPM oriented PDB file in Maestro and select the 'Prep Wiz' tool using the folloing settings:
+Open Maestro and load the OPM oriented PDB file. Select the *Prep Wiz* tool found in the top toolbar and check the following settings. To run click preprocess.
 
 ![Prep](/images/proteinPrepWizard.png)
 
-(While Maestro can automically assign CYX disulfides I prefer to perfer to assign them manually.)
+Note: While Maestro can automically assign CYX disulfides I prefer to perfer to assign them manually prior to importing the structure into Maestro.
 
-Optimize side chain protonation states and the hydrogen bonding network using PROPKA by clicking 'optimize'
+After preprocessing, select the *refine* tab and click *optimize* to determine optimal side chain protonation states and hydrogen boding networks using PROPKA.
 
 ![PROPKA](/images/refine.png)
 
