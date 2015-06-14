@@ -10,7 +10,7 @@ Before proceeding, it is highly recommened to familiarize yourself with the offi
 * [PyMOL](http://sourceforge.net/projects/pymol)
 
 ##Step 0: PDB preparation
-Open and prepare your structure for LEaP input as normal in PyMOL or other PDB editing software. 
+Open and prepare your structure for LEaP input as normal in PyMOL or another PDB editing software. 
 
 ##Step 1: Determine Protein Membrane Orientation
 Submit the cleaned membrane protein generated in **step 0** to the [OPM server](http://opm.phar.umich.edu/server.php) for optimal membrane orientation determination. **Always verify the membrane orientation before proceeding.**
@@ -43,11 +43,11 @@ Next, select the *Solvation* tab to set your system dimensions and click run.
 
 Note: For larger systems this may take up to several minutes. At this point the water model does not matter. If you would like to use other water models than SPC simply edit the first bash script line in **step 5**.
 
-Here is an example system:
+[Example desmond system](example/desmond_setup_1-out.cms):
 
 ![DesRaw](/images/desmondRaw.png)
 
-##Step 4: Removing Hydrogens
+##Step 4: Remove Hydrogens
 In the topbar of Masetro, select Tools > View In PyMOL > Workspace. Remove hydrogens on all protein and ligand residues (ACE -> NMA caps) **NOT** on lipids! 
 
 ![HydroRemove](/images/removeHydrogens.png)
@@ -107,4 +107,3 @@ quit
 **Note: Due to Maestros naming of ions, it is important to check the total system charge before runing simunations. Typically a handful of ions will be removed due to naming duplications and must be added back via 'addIonsRand'**
 
 Voila, Your system is ready for simulation using AMBER!
-
