@@ -29,23 +29,33 @@ After preprocessing, select the *refine* tab and click *optimize* to determine o
 **Always manually verify protonation states and side chain orentations manually by selecting 'Interactive Optimizer'**
 
 ##Step 3: System Building
-Select Tasks > Molecular Dynamics > System Setup. Under 'Edit Membrane...' select POPC (300K) and click 'Place on Prealigned Structure'. Under 'Ions' select 'Neutralize by adding' and 'Add salt' to 0.15 molar concentration
+Open the Desmond system builder by selecting Tasks > Molecular Dynamics > System Setup from the top bar. Under *Edit Membrane...* select POPC (300K) and click 'Place on Prealigned Structure'. 
+
+![memb](/images/membraneSettings.png)
+
+Under *Ions* select *Neutralize by adding* and *Add salt* to 0.15 M.
 
 ![Salt](/images/salts.png)
 
-Click Run. Note: For larger systems this may take up to several minutes.
+Next, select the *Solvation* tab to set your system dimensions and click run.
+
+![sysBuilder](/images/sysBuilder.png.png)
+
+Note: For larger systems this may take up to several minutes. At this point the water model does not matter. If you would like to use other water models than SPC simply edit the first bash script line in **step 5**.
+
+Here is an example system:
 
 ![DesRaw](/images/desmondRaw.png)
 
 ##Step 4: Removing Hydrogens
-Select Tools > View In PyMOL > Workspace. Remove hydrogens on all protein and ligand residues (ACE -> NMA caps) *NOT* on lipids! 
+In the topbar of Masetro, select Tools > View In PyMOL > Workspace. Remove hydrogens on all protein and ligand residues (ACE -> NMA caps) **NOT** on lipids! 
 
 ![HydroRemove](/images/removeHydrogens.png)
 
 **Save the PDB as desmondOut.pdb, This is important for the script below to run automatically!**
 
 ##Step 5: reformat PDB
-Copy POPC.csv, found in the includes folder, to the working folder and run the following terminal commands:
+Copy [POPC.csv](/includes/POPC.csv) to the working folder and run the following terminal commands to convert your system to a LEaP compatible PDB:
 
 ```bash
 awk '{if ($4 == "SPC") printf("%4s %6d %-4s %-4s %5d %10.3f %7.3f %7.3f  1.00  0.00\n"), $1, $2, $3, $4, $5,$6,$7,$8; else print $0}' desmondOut.pdb > SPCfix.pdb
@@ -57,12 +67,13 @@ sed 's/CL/Cl-/' LipidFix.pdb | sed 's/NA/Na+/' | sed 's/  CL/Cl-/' | sed 's/  NA
 awk '/NME/{print $0 ;print "Ter";next}1' SaltFix.pdb > TerFIX.pdb
 ```
 
-Next, open TerFIX.pdb and add CYX residues, if applicable, and renumber NME residues by +1 (NME A 348A -> NME A 349)
+Next, open TerFIX.pdb and add CYX residues and remuber NME residues by +1 (ex: NME A 348A should be NME A 349) if applicable.
 
 ![Renumb](/images/terminal.png)
 
 ##Step 6: TLeap input
-Extract the box dimensions from *desmond_setup_1-out.cms* 
+
+Extract the box dimensions from *desmond_setup_1-out.cms*.
 
 ```
   69.378655
@@ -76,21 +87,24 @@ Extract the box dimensions from *desmond_setup_1-out.cms*
   95.385489
 ```
 
-Utilizing these dimensions, here is an example TLeap input file:
+Utilizing these dimensions, here is an example tLEaP input file:
 
 ```
 source leaprc.ff14SB
 source leaprc.lipid14
 
-system = loadpdb ./protein/POLY.pdb
+system = loadpdb ./myProtein.pdb
 
 bond system.110.SG system.187.SG
 
 set system box { 69.378655 64.033248 95.385489 }
 
-saveamberparm system ./system/POLY.prmtop ./system/POLY.inpcrd
+saveamberparm system ./myProtein.prmtop ./myProtein.inpcrd
 
 quit
 ```
 
-**Due to Maestros naming of ions, it is important to check the total system charge before runing simunations. Typically a handful of ions will be removed due to naming duplications and must be added back via 'addIonsRand'**
+**Note: Due to Maestros naming of ions, it is important to check the total system charge before runing simunations. Typically a handful of ions will be removed due to naming duplications and must be added back via 'addIonsRand'**
+
+Voila, Your system is ready for simulation using AMBER!
+
