@@ -63,7 +63,7 @@ Copy [POPC.csv](/includes/POPC.csv) to the working folder and run the following 
 
 ```bash
 awk 'BEGIN {w=1;l=0} /SPC/{printf("%4s %6d %-4s %-4s %5d  %9.3f %7.3f %7.3f  1.00  0.00\n"), $1, $2, $3, "WAT", w,$6,$7,$8; l++} {if(l % 3 == 0) w++;} !/SPC/{print $0}' desmondOut.pdb > waterFix.pdb
-awk '{if ($4 == "ACE" && $3 != "C") next; else print $0}' WATfix.pdb > ACEfix.pdb
+awk '{if ($4 == "ACE" && $3 != "C") next; else print $0}' waterFix.pdb > ACEfix.pdb
 awk '{if ($4 == "NMA" && $3 != "N") next; else print $0}'  ACEfix.pdb | sed 's/NMA/NME/' > NMEfix.pdb
 charmmlipid2amber.py -c POPC.csv -i NMEfix.pdb -o LipidFix.pdb
 sed 's/CL/Cl-/' LipidFix.pdb | sed 's/NA/Na+/' | sed 's/  CL/Cl-/' | sed 's/  NA/Na+/' > SaltFix.pdb
