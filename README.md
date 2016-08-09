@@ -1,5 +1,7 @@
 # AMBER Maestro Protein-Lipid Tutorial
 
+**This tutorial has been updated for AMBER 16 and Maestro 2016.1**
+
 This tutorial provides a step-by-step protocol to build protein-lipid systems for AMBER using the free version of Maestro bundled with Desmond. In contrast to that of the CHARMM membrane system web builder, Maestro's system builder provides a greater level of control for system size and orentation within the membrane to optimize simulation NS/day. Currently, only POPC membranes are supported. However, users are encouraged to generate and share their own charmmlipid2amber.py compatible conversion rulesets.
 
 While written for membrane proteins, this method can be applied to soluble proteins as well with slight modification.
@@ -60,8 +62,7 @@ In the topbar of Masetro, select Tools > View In PyMOL > Workspace. Remove hydro
 Copy [POPC.csv](/includes/POPC.csv) to the working folder and run the following terminal commands to convert your system to a LEaP compatible PDB:
 
 ```bash
-awk '{if ($4 == "SPC") printf("%4s %6d %-4s %-4s %5d %10.3f %7.3f %7.3f  1.00  0.00\n"), $1, $2, $3, $4, $5,$6,$7,$8; else print $0}' desmondOut.pdb > SPCfix.pdb
-sed 's/SPC/WAT/' SPCfix.pdb > WATfix.pdb
+awk 'BEGIN {w=1;l=0} /SPC/{printf("%4s %6d %-4s %-4s %5d  %9.3f %7.3f %7.3f  1.00  0.00\n"), $1, $2, $3, "WAT", w,$6,$7,$8; l++} {if(l % 3 == 0) w++;} !/SPC/{print $0}' desmondOut.pdb > waterFix.pdb
 awk '{if ($4 == "ACE" && $3 != "C") next; else print $0}' WATfix.pdb > ACEfix.pdb
 awk '{if ($4 == "NMA" && $3 != "N") next; else print $0}'  ACEfix.pdb | sed 's/NMA/NME/' > NMEfix.pdb
 charmmlipid2amber.py -c POPC.csv -i NMEfix.pdb -o LipidFix.pdb
@@ -75,7 +76,7 @@ Next, open TerFIX.pdb and add CYX residues and remuber NME residues by +1 (ex: N
 
 ##Step 6: TLeap input
 
-Extract the box dimensions from *desmond_setup_1-out.cms*.
+Extract the box dimensions from *desmond_setup_1-out.cms* and add +2 to each dimension to avoid issues with periodic boundary conditions during energy minimization and NVT equilibration.
 
 ```
   69.378655
@@ -99,7 +100,7 @@ system = loadpdb ./myProtein.pdb
 
 bond system.110.SG system.187.SG
 
-set system box { 69.378655 64.033248 95.385489 }
+set system box { 71.378655 66.033248 97.385489 }
 
 saveamberparm system ./myProtein.prmtop ./myProtein.inpcrd
 
