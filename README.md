@@ -8,18 +8,18 @@ While written for membrane proteins, this method can be applied to soluble prote
 
 Before proceeding, it is highly recommened to familiarize yourself with the offical AMBER lipid tutorial found [here](http://ambermd.org/tutorials/advanced/tutorial16/) as a working level knowledge of AMBER membrane systems is assumed.
 
-##Requirments
+## Requirments
 * Any modern linux distribution
 * [Desmond/Maestro](https://www.deshawresearch.com/downloads/download_desmond.cgi)
 * [PyMOL](http://sourceforge.net/projects/pymol)
 
-##Step 0: PDB preparation
+## Step 0: PDB preparation
 Open and prepare your structure for LEaP input as normal in PyMOL or another PDB editing software. 
 
-##Step 1: Determine Protein Membrane Orientation
+## Step 1: Determine Protein Membrane Orientation
 Submit the cleaned membrane protein generated in **step 0** to the [OPM server](http://opm.phar.umich.edu/server.php) for optimal membrane orientation determination. **Always verify the membrane orientation before proceeding.**
 
-##Step 2: Maestro Prep Wiz
+## Step 2: Maestro Prep Wiz
 Open Maestro and load the OPM oriented PDB file. Select the *Prep Wiz* tool found in the top toolbar and check the following settings. To run click preprocess.
 
 ![Prep](/images/proteinPrepWizard.png)
@@ -32,7 +32,7 @@ After preprocessing, select the *refine* tab and click *optimize* to determine o
 
 **Always manually verify protonation states and side chain orentations manually by selecting 'Interactive Optimizer'**
 
-##Step 3: System Building
+## Step 3: System Building
 Open the Desmond system builder by selecting Tasks > Molecular Dynamics > System Setup from the top bar. Under *Edit Membrane...* select POPC (300K) and click 'Place on Prealigned Structure'. 
 
 ![memb](/images/membraneSettings.png)
@@ -51,14 +51,14 @@ Note: For larger systems this may take up to several minutes. At this point the 
 
 ![DesRaw](/images/desmondRaw.png)
 
-##Step 4: Remove Hydrogens
+## Step 4: Remove Hydrogens
 In the topbar of Masetro, select Tools > View In PyMOL > Workspace. Remove hydrogens on all protein and ligand residues (ACE -> NMA caps) **NOT** on lipids! 
 
 ![HydroRemove](/images/removeHydrogens.png)
 
 **Save the PDB as desmondOut.pdb, This is important for the script below to run automatically!**
 
-##Step 5: reformat PDB
+## Step 5: reformat PDB
 Copy [POPC.csv](/includes/POPC.csv) to the working folder and run the following terminal commands to convert your system to a LEaP compatible PDB:
 
 ```bash
@@ -74,7 +74,7 @@ Next, open TerFIX.pdb and add CYX residues and remuber NME residues by +1 (ex: N
 
 ![Renumb](/images/terminal.png)
 
-##Step 6: TLeap input
+## Step 6: TLeap input
 
 Extract the box dimensions from *desmond_setup_1-out.cms* and add +2 to each dimension to avoid issues with periodic boundary conditions during energy minimization and NVT equilibration.
 
